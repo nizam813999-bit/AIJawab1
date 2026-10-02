@@ -932,7 +932,10 @@ jobs:
       # ==========================================================
 
       - name: Build Debug APK
-        run: gradle assembleDebug
+  run: |
+    export GRADLE_OPTS="-Xmx1024m"
+    ./gradlew --no-daemon --parallel assembleDebug 2>&1 | tee build.log
+    tail -50 build.log
 
       # ==========================================================
       # Upload APK agar bisa didownload
